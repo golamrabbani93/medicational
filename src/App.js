@@ -10,7 +10,6 @@ function App() {
 			<button className="btn btn-accent">Accent</button>
 			<button className="btn btn-ghost">Ghost</button>
 			<button className="btn btn-link">Link</button>
-			<h2>Hello</h2>
 		</div>
 	);
 }

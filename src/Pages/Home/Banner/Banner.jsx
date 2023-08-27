@@ -20,7 +20,9 @@ const Banner = () => {
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the
 					</p>
-					<button className="btn btn-primary">Get Started</button>
+					<button className="btn btn-primary bg-gradient-to-r from-secondary to-primary">
+						Get Started
+					</button>
 				</div>
 			</div>
 		</div>

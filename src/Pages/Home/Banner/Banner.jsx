@@ -5,7 +5,7 @@ import bgchair from '../../../assets/images/bg.png';
 const Banner = () => {
 	return (
 		<div
-			className="hero min-h-screen w-[1363px] m-auto "
+			className="hero min-h-[90vh] lg:w-[1363px] m-auto "
 			style={{
 				backgroundImage: `url(${bgchair})`,
 			}}

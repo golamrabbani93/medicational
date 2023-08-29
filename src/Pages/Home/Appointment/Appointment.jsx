@@ -10,7 +10,7 @@ const Appointment = () => {
 					backgroundImage: `url(${appointment})`,
 				}}
 			>
-				<div className="card grid grid-cols-1 lg:grid-cols-2 lg:mx-44 lg:mb-28">
+				<div className="card grid grid-cols-1 lg:grid-cols-2 lg:mx-44 mb-20 lg:mb-28">
 					<figure>
 						<img
 							className="hidden lg:block rounded-xl absolute -top-[88px]"

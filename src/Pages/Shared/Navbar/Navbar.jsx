@@ -21,9 +21,9 @@ const Navbar = () => {
 		</>
 	);
 	return (
-		<div className="navbar bg-base-100 flex justify-between m-auto w-[1440px]">
-			<div className="navbar-start">
-				<div className="dropdown">
+		<div className="navbar bg-base-100 lg:w-[1440px]">
+			<div className="navbar-start flex flex-row-reverse justify-end">
+				<div className="dropdown ">
 					<label tabIndex={0} className="btn btn-ghost lg:hidden">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

@@ -3,7 +3,7 @@ import doctor from '../../../assets/images/doctor-small.png';
 import appointment from '../../../assets/images/appointment.png';
 const Appointment = () => {
 	return (
-		<div className="mt-[200px]">
+		<div className="mt-16 md:mt-[200px]">
 			<div
 				className="relative"
 				style={{
@@ -18,7 +18,7 @@ const Appointment = () => {
 							alt="doctor"
 						/>
 					</figure>
-					<div className="mt-24 mb-28 w-4/5">
+					<div className="ml-7  mt-24 mb-28 w-4/5">
 						<h3 className="text-secondary font-bold mb-5">Appointment</h3>
 						<h2 className="card-title  text-white text-4xl font-semibold mb-5">
 							Make an appointment Today
@@ -31,7 +31,7 @@ const Appointment = () => {
 							page
 						</p>
 
-						<button className="btn btn-primary bg-gradient-to-r from-secondary to-primary">
+						<button className="btn btn-primary text-white font-bold bg-gradient-to-r from-secondary to-primary">
 							Get Started
 						</button>
 					</div>

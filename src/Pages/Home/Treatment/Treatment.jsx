@@ -10,7 +10,7 @@ const Treatment = () => {
 				<h2 className="card-title text-5xl font-bold mb-6">
 					Exceptional Dental Care, on Your Terms
 				</h2>
-				<p className="mb-6">
+				<p className="mb-6 text-justify">
 					It is a long established fact that a reader will be distracted by the readable content of
 					a page when looking at its layout. The point of using Lorem Ipsumis that it has a
 					more-or-less normal distribution of letters,as opposed to using 'Content here, content

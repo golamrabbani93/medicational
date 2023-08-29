@@ -6,7 +6,7 @@ const Contact = () => {
 			style={{
 				backgroundImage: `url(${contactBg})`,
 			}}
-			className="mb-20 py-16 text-center"
+			className=" py-16 text-center"
 		>
 			<div className="contact-head">
 				<h3 className="text-secondary font-bold mb-2">Contact Us </h3>

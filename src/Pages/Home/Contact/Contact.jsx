@@ -17,21 +17,18 @@ const Contact = () => {
 					<input
 						type="text"
 						placeholder="Type here"
-						className="input input-bordered input-secondary w-full max-w-xs"
+						className="input input-bordered input-secondary w-full "
 					/>
 				</div>
 				<div className="mb-5">
 					<input
 						type="text"
 						placeholder="Type here"
-						className="input input-bordered input-secondary w-full max-w-xs"
+						className="input input-bordered input-secondary w-full "
 					/>
 				</div>
 				<div className="mb-5">
-					<textarea
-						className="textarea textarea-primary w-full max-w-xs h-36"
-						placeholder="Bio"
-					></textarea>
+					<textarea className="textarea textarea-primary w-full  h-36" placeholder="Bio"></textarea>
 				</div>
 
 				<button className="btn btn-primary bg-gradient-to-r from-secondary to-primary">

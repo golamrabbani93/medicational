@@ -12,6 +12,7 @@ const Testimonials = () => {
 					<div
 						className="me-12 w-96 
 					"
+						key={testimonial}
 					>
 						<p className="mb-10">
 							It is a long established fact that by the readable content of a lot layout. The point

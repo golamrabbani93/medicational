@@ -10,7 +10,7 @@ const Footer = () => {
 				backgroundPosition: 'center',
 			}}
 		>
-			<div className="footer py-20 justify-items-center">
+			<div className="footer ml-9 md:ml-0 py-20 md:justify-items-center">
 				<div>
 					<span className="footer-title">Services</span>
 					<Link className="link link-hover text-accent">Emergency Checkup</Link>

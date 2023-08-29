@@ -2,11 +2,11 @@ import React from 'react';
 import treatment from '../../../assets/images/treatment.png';
 const Treatment = () => {
 	return (
-		<div className="card grid grid-cols-1 lg:grid-cols-2 lg:mx-44 lg:mb-28">
+		<div className="card grid grid-cols-1 lg:grid-cols-2 mt-20 lg:mx-44 lg:mb-28">
 			<figure>
-				<img className="w-[450px] rounded-xl" src={treatment} alt="treatment" />
+				<img className="w-[322px] md:w-[450px] rounded-xl" src={treatment} alt="treatment" />
 			</figure>
-			<div className="mt-32 w-4/5">
+			<div className="m-7 md:mt-32 w-4/5">
 				<h2 className="card-title text-5xl font-bold mb-6">
 					Exceptional Dental Care, on Your Terms
 				</h2>
@@ -17,7 +17,7 @@ const Treatment = () => {
 					here', making it look like readable English. Many desktop publishing packages and web page
 				</p>
 
-				<button className="btn btn-primary bg-gradient-to-r from-secondary to-primary">
+				<button className="btn btn-primary text-white font-bold bg-gradient-to-r from-secondary to-primary">
 					Get Started
 				</button>
 			</div>

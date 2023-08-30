@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import bgchair from '../../../assets/images/bg.png';
 import chair from '../../../assets/images/chair.png';
 import {DayPicker} from 'react-day-picker';
 const AppointmentBanner = () => {
+	const [selectedDate, setSelectedDate] = useState(new Date());
 	return (
 		<div
 			className="hero min-h-[90vh] lg:w-[1363px] m-auto "
@@ -17,7 +18,7 @@ const AppointmentBanner = () => {
 					alt=""
 				/>
 				<div className="md:w-[540px]">
-					<DayPicker />
+					<DayPicker mode="single" selected={selectedDate} onSelect={setSelectedDate} />
 				</div>
 			</div>
 		</div>

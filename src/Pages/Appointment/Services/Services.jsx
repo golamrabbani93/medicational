@@ -4,9 +4,10 @@ import SingleService from './SingleService';
 import BookingModal from './BookingModal/BookingModal';
 
 const Services = ({selectedDate}) => {
+	// load all appointment services
 	const [services, setServices] = useState(null);
+	// load Single appointment services
 	const [service, setService] = useState(null);
-	console.log('🚀🚀: Services -> service', service);
 
 	useEffect(() => {
 		fetch('appointmentOptions.json')
@@ -31,7 +32,13 @@ const Services = ({selectedDate}) => {
 					))}
 			</div>
 			{/* Start Modal */}
-			<BookingModal></BookingModal>
+			{service && (
+				<BookingModal
+					service={service}
+					setService={setService}
+					selectedDate={selectedDate}
+				></BookingModal>
+			)}
 		</div>
 	);
 };

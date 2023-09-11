@@ -2,12 +2,6 @@ import React from 'react';
 
 const SingleService = ({service, setService}) => {
 	const {name, slots} = service;
-	const modal = () => {
-		document.getElementById('bookingModal').showModal();
-	};
-	const serviceSet = () => {
-		setService(service);
-	};
 
 	return (
 		<div className="card w-96 bg-base-100 shadow-xl">
@@ -18,16 +12,16 @@ const SingleService = ({service, setService}) => {
 					{slots.length} {slots.length > 1 ? 'SPACES' : 'SPACE'} AVAILABLE
 				</p>
 				<div className="card-actions justify-center">
-					<button
+					<button></button>
+					{/* The button to open modal */}
+					<label
+						htmlFor="bookingModal"
 						disabled={slots.length === 0}
 						className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white"
-						onClick={() => {
-							modal();
-							serviceSet();
-						}}
+						onClick={() => setService(service)}
 					>
 						Book Appointment
-					</button>
+					</label>
 				</div>
 			</div>
 		</div>

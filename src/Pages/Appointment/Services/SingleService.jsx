@@ -1,7 +1,14 @@
 import React from 'react';
 
-const SingleService = ({service, date}) => {
+const SingleService = ({service, setService}) => {
 	const {name, slots} = service;
+	const modal = () => {
+		document.getElementById('bookingModal').showModal();
+	};
+	const serviceSet = () => {
+		setService(service);
+	};
+
 	return (
 		<div className="card w-96 bg-base-100 shadow-xl">
 			<div className="card-body text-center">
@@ -14,6 +21,10 @@ const SingleService = ({service, date}) => {
 					<button
 						disabled={slots.length === 0}
 						className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white"
+						onClick={() => {
+							modal();
+							serviceSet();
+						}}
 					>
 						Book Appointment
 					</button>

@@ -10,15 +10,20 @@ const SignUp = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: {errors},
 	} = useForm();
 	const handleSignUp = (data) => {
 		userSignUp(data.email, data.password)
 			.then((result) => {
-				console.log(result);
+				console.log('🚀🚀: handleSignUp -> result', result);
+				reset();
 				toast.success('Sign Up Complete');
 			})
 			.catch((err) => {
+				// const message = err.message;
+				// const newMessage = message.split('/')[1];
+				// const removeLast3 = newMessage.substring(0, newMessage.length - 2);
 				toast.error('Sign Up Faild');
 			});
 	};

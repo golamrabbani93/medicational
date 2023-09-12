@@ -23,36 +23,43 @@ const SignUp = () => {
 									<span className="label-text">Name</span>
 								</label>
 								<input
-									{...register('name', {required: true})}
+									{...register('name', {required: 'Name is required'})}
 									type="text"
 									placeholder="name"
 									className="input input-bordered"
 								/>
-								{errors.name && <span className="text-red-600">Name is required</span>}
+								{errors.name && <span className="text-red-600">{errors.name.message}</span>}
 							</div>
 							<div className="form-control">
 								<label className="label">
 									<span className="label-text">Email</span>
 								</label>
 								<input
-									{...register('email', {required: true})}
+									{...register('email', {required: 'Email is required'})}
 									type="text"
 									placeholder="email"
 									className="input input-bordered"
 								/>
-								{errors.email && <span className="text-red-600">Email is required</span>}
+								{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 							</div>
 							<div className="form-control">
 								<label className="label">
 									<span className="label-text">Password</span>
 								</label>
 								<input
-									{...register('password', {required: true})}
+									{...register('password', {
+										required: 'Password is required',
+										minLength: {value: 6, message: 'Password must be 6 characters long'},
+										pattern: {
+											value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+											message: 'Password must have uppercase, number and special characters',
+										},
+									})}
 									type="password"
 									placeholder="password"
 									className="input input-bordered"
 								/>
-								{errors.password && <span className="text-red-600">Password is required</span>}
+								{errors.password && <span className="text-red-600">{errors.password.message}</span>}
 							</div>
 							<div className="form-control mt-6">
 								<button className="btn btn-accent">Sign Up</button>
@@ -61,7 +68,7 @@ const SignUp = () => {
 						<div className="">
 							<h3 className="text-xs text-center">
 								Already in Medicational?{' '}
-								<Link to="/signup" className="text-secondary">
+								<Link to="/login" className="text-secondary">
 									Login
 								</Link>
 							</h3>

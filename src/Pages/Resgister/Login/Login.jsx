@@ -24,24 +24,27 @@ const Login = () => {
 									<span className="label-text">Email</span>
 								</label>
 								<input
-									{...register('email', {required: true})}
+									{...register('email', {required: 'Email is required'})}
 									type="text"
 									placeholder="email"
 									className="input input-bordered"
 								/>
-								{errors.email && <span className="text-red-600">Email is required</span>}
+								{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 							</div>
 							<div className="form-control">
 								<label className="label">
 									<span className="label-text">Password</span>
 								</label>
 								<input
-									{...register('password', {required: true})}
+									{...register('password', {
+										required: 'Password is required',
+										minLength: {value: 6, message: 'Password must be 6 characters long'},
+									})}
 									type="password"
 									placeholder="password"
 									className="input input-bordered"
 								/>
-								{errors.password && <span className="text-red-600">Password is required</span>}
+								{errors.password && <span className="text-red-600">{errors.password.message}</span>}
 								<label className="label">
 									<Link href="#" className="label-text-alt link link-hover">
 										Forgot password?

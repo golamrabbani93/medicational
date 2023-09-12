@@ -14,10 +14,8 @@ const Login = () => {
 		formState: {errors},
 	} = useForm();
 	const handleLogin = (data) => {
-		console.log('🚀🚀: handleLogin -> data', data);
 		userSignIn(data.email, data.password)
 			.then((result) => {
-				console.log('🚀🚀: handleSignUp -> result', result);
 				reset();
 				toast.success('Login Complete');
 			})

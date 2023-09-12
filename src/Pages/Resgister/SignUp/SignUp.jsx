@@ -16,7 +16,6 @@ const SignUp = () => {
 	const handleSignUp = (data) => {
 		userSignUp(data.email, data.password)
 			.then((result) => {
-				console.log('🚀🚀: handleSignUp -> result', result);
 				reset();
 				toast.success('Sign Up Complete');
 			})

@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {FaUserAlt} from 'react-icons/fa';
 import {AuthContext} from '../../../Contexts/AuthProvider';
+import {toast} from 'react-hot-toast';
 const Navbar = () => {
-	const {user} = useContext(AuthContext);
-	console.log('🚀🚀: Navbar -> user', user);
+	const {user, logOut} = useContext(AuthContext);
 	const navlink = (
 		<>
 			<li>
@@ -18,11 +18,24 @@ const Navbar = () => {
 			<li>
 				<NavLink to={'/appointment'}>Appointment</NavLink>
 			</li>
-			<li>
-				<NavLink to={'/login'}>Login</NavLink>
-			</li>
+			{!user?.uid && (
+				<li>
+					<NavLink to={'/login'}>Login</NavLink>
+				</li>
+			)}
 		</>
 	);
+
+	// !User LogOut
+	const UserLogOut = () => {
+		logOut()
+			.then((result) => {
+				toast.success('Log Out Complete');
+			})
+			.catch((err) => {
+				toast.error('Log Out Faild');
+			});
+	};
 	return (
 		<div className="navbar bg-base-100 flex justify-between m-auto lg:w-[1440px]">
 			<div className=" flex flex-row-reverse justify-end">
@@ -56,27 +69,32 @@ const Navbar = () => {
 				<ul className="menu menu-horizontal px-1">{navlink}</ul>
 			</div>
 			{/* user avater section */}
-			<div className="dropdown dropdown-end">
-				<label tabIndex={0} className="btn btn-outline btn-circle avatar onlin">
-					<div className="w-10 rounded-full">
-						{/* <img alt="" src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
-						<div className="flex justify-center items-center h-full">
-							<FaUserAlt className=""></FaUserAlt>
+			{user?.uid && (
+				<div className="dropdown dropdown-end">
+					<label tabIndex={0} className="btn btn-outline btn-circle avatar onlin">
+						<div className="w-10 rounded-full">
+							{/* <img alt="" src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
+							<div className="flex justify-center items-center h-full">
+								<FaUserAlt className=""></FaUserAlt>
+							</div>
 						</div>
-					</div>
-				</label>
-				<ul
-					tabIndex={0}
-					className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
-				>
-					<li>
-						<Link className="justify-between ">Profile</Link>
-					</li>
-					<li>
-						<button className="justify-between">Log Out {user}</button>
-					</li>
-				</ul>
-			</div>
+					</label>
+					<ul
+						tabIndex={0}
+						className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
+					>
+						<li>
+							<Link className="justify-between ">Profile</Link>
+						</li>
+
+						<li>
+							<button onClick={() => UserLogOut()} className="justify-between">
+								Log Out{' '}
+							</button>
+						</li>
+					</ul>
+				</div>
+			)}
 		</div>
 	);
 };

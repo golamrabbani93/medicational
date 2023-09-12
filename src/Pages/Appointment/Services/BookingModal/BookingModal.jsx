@@ -15,7 +15,6 @@ const BookingModal = ({service, setService, selectedDate}) => {
 			email: data.email.value,
 		};
 		setService(null);
-		console.log('🚀🚀: bookingData -> appointmentDetails', appointmentDetails);
 	};
 	return (
 		<div>

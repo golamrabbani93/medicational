@@ -2,23 +2,34 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
 	const {
 		register,
 		handleSubmit,
 		formState: {errors},
 	} = useForm();
-	const handleLogin = (data) => {
-		console.log('🚀🚀: handleLogin -> data', data);
+	const handleSignUp = (data) => {
+		console.log('🚀🚀: handleSignUp -> data', data);
 	};
-
 	return (
 		<div>
 			<div className="hero min-h-screen">
 				<div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-					<h3 className="text-xl text-center mt-6">Login</h3>
+					<h3 className="text-xl text-center mt-6">Sign Up</h3>
 					<div className="card-body">
-						<form onSubmit={handleSubmit(handleLogin)}>
+						<form onSubmit={handleSubmit(handleSignUp)}>
+							<div className="form-control">
+								<label className="label">
+									<span className="label-text">Name</span>
+								</label>
+								<input
+									{...register('name', {required: true})}
+									type="text"
+									placeholder="name"
+									className="input input-bordered"
+								/>
+								{errors.name && <span className="text-red-600">Name is required</span>}
+							</div>
 							<div className="form-control">
 								<label className="label">
 									<span className="label-text">Email</span>
@@ -42,21 +53,16 @@ const Login = () => {
 									className="input input-bordered"
 								/>
 								{errors.password && <span className="text-red-600">Password is required</span>}
-								<label className="label">
-									<Link href="#" className="label-text-alt link link-hover">
-										Forgot password?
-									</Link>
-								</label>
 							</div>
 							<div className="form-control mt-6">
-								<button className="btn btn-accent">Login</button>
+								<button className="btn btn-accent">Sign Up</button>
 							</div>
 						</form>
 						<div className="">
 							<h3 className="text-xs text-center">
-								New to Medicational?{' '}
+								Already in Medicational?{' '}
 								<Link to="/signup" className="text-secondary">
-									Create new account
+									Login
 								</Link>
 							</h3>
 							<div className="divider">OR</div>
@@ -69,4 +75,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SignUp;

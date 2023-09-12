@@ -6,7 +6,7 @@ import {toast} from 'react-hot-toast';
 
 const SignUp = () => {
 	// !get sign up from auth provider
-	const {userSignUp} = useContext(AuthContext);
+	const {userSignUp, updateUser} = useContext(AuthContext);
 	const {
 		register,
 		handleSubmit,
@@ -18,6 +18,16 @@ const SignUp = () => {
 			.then((result) => {
 				reset();
 				toast.success('Sign Up Complete');
+
+				//! user Name Update start
+				const userinfo = {
+					displayName: data.name,
+				};
+				console.log('🚀🚀: handleSignUp -> userinfo', userinfo);
+				updateUser(userinfo)
+					.then(() => {})
+					.catch((err) => console.log(err));
+				// //! user Name Update end
 			})
 			.catch((err) => {
 				// const message = err.message;

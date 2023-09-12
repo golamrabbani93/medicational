@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {FaUserAlt} from 'react-icons/fa';
+import {AuthContext} from '../../../Contexts/AuthProvider';
 const Navbar = () => {
+	const {user} = useContext(AuthContext);
+	console.log('🚀🚀: Navbar -> user', user);
 	const navlink = (
 		<>
 			<li>
@@ -70,7 +73,7 @@ const Navbar = () => {
 						<Link className="justify-between ">Profile</Link>
 					</li>
 					<li>
-						<button className="justify-between">Log Out</button>
+						<button className="justify-between">Log Out {user}</button>
 					</li>
 				</ul>
 			</div>

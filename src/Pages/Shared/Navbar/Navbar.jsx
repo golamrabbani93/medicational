@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
-
+import {FaUserAlt} from 'react-icons/fa';
 const Navbar = () => {
 	const navlink = (
 		<>
@@ -22,7 +22,7 @@ const Navbar = () => {
 	);
 	return (
 		<div className="navbar bg-base-100 flex justify-between m-auto lg:w-[1440px]">
-			<div className="navbar-start flex flex-row-reverse justify-end">
+			<div className=" flex flex-row-reverse justify-end">
 				<div className="dropdown ">
 					<label tabIndex={0} className="btn btn-ghost lg:hidden">
 						<svg
@@ -51,6 +51,28 @@ const Navbar = () => {
 			</div>
 			<div className="navbar-center hidden lg:flex">
 				<ul className="menu menu-horizontal px-1">{navlink}</ul>
+			</div>
+			{/* user avater section */}
+			<div className="dropdown dropdown-end">
+				<label tabIndex={0} className="btn btn-outline btn-circle avatar onlin">
+					<div className="w-10 rounded-full">
+						{/* <img alt="" src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
+						<div className="flex justify-center items-center h-full">
+							<FaUserAlt className=""></FaUserAlt>
+						</div>
+					</div>
+				</label>
+				<ul
+					tabIndex={0}
+					className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
+				>
+					<li>
+						<Link className="justify-between ">Profile</Link>
+					</li>
+					<li>
+						<button className="justify-between">Log Out</button>
+					</li>
+				</ul>
 			</div>
 		</div>
 	);

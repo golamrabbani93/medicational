@@ -23,7 +23,6 @@ const SignUp = () => {
 				const userinfo = {
 					displayName: data.name,
 				};
-				console.log('🚀🚀: handleSignUp -> userinfo', userinfo);
 				updateUser(userinfo)
 					.then(() => {})
 					.catch((err) => console.log(err));

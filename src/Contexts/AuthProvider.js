@@ -13,7 +13,6 @@ const auth = getAuth(app);
 const AuthProvider = ({children}) => {
 	// !set sign in user
 	const [user, setUser] = useState({});
-	console.log('🚀🚀: AuthProvider -> user', user);
 
 	//! Sign up with email and password
 	const userSignUp = (email, password) => {

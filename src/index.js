@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import {QueryClient, QueryClientProvider} from 'react-query';
 import 'react-day-picker/dist/style.css';
 import AuthProvider from './Contexts/AuthProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+//! Create a client
+const queryClient = new QueryClient();
+
 root.render(
 	<React.StrictMode>
-		<AuthProvider>
-			<App />
-		</AuthProvider>
+		<QueryClientProvider client={queryClient}>
+			<AuthProvider>
+				<App />
+			</AuthProvider>
+		</QueryClientProvider>
 	</React.StrictMode>,
 );
 

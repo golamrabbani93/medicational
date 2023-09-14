@@ -1,7 +1,11 @@
 import {format} from 'date-fns';
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../../../Contexts/AuthProvider';
 
 const BookingModal = ({service, setService, selectedDate}) => {
+	// !user data
+	const {user} = useContext(AuthContext);
+	console.log('🚀🚀: BookingModal -> user', user);
 	const {name, slots} = service;
 	const date = format(selectedDate, 'PP');
 	const bookingData = (e) => {
@@ -15,6 +19,7 @@ const BookingModal = ({service, setService, selectedDate}) => {
 			email: data.email.value,
 		};
 		setService(null);
+		console.log('🚀🚀: bookingData -> appointmentDetails', appointmentDetails);
 	};
 	return (
 		<div>

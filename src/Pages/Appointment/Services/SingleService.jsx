@@ -1,7 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../../Contexts/AuthProvider';
+import {toast} from 'react-hot-toast';
+import {useNavigate} from 'react-router-dom';
 
 const SingleService = ({service, setService}) => {
 	const {name, slots} = service;
+	// !Get User
+	const {user} = useContext(AuthContext);
+	const navigate = useNavigate();
+
+	const userLogedIn = () => {
+		if (user && user.uid) {
+			setService(service);
+		} else {
+			toast.error('please Login First');
+			navigate('/login');
+		}
+	};
 
 	return (
 		<div className="card w-96 bg-base-100 shadow-xl">
@@ -12,13 +27,12 @@ const SingleService = ({service, setService}) => {
 					{slots.length} {slots.length > 1 ? 'SPACES' : 'SPACE'} AVAILABLE
 				</p>
 				<div className="card-actions justify-center">
-					<button></button>
 					{/* The button to open modal */}
 					<label
 						htmlFor="bookingModal"
 						disabled={slots.length === 0}
 						className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white"
-						onClick={() => setService(service)}
+						onClick={userLogedIn}
 					>
 						Book Appointment
 					</label>

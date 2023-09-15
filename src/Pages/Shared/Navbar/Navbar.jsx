@@ -18,11 +18,11 @@ const Navbar = () => {
 			<li>
 				<NavLink to={'/appointment'}>Appointment</NavLink>
 			</li>
-			{user?.uid && (
-				<li>
-					<NavLink to={'/dashboard'}>Dashboard</NavLink>
-				</li>
-			)}
+			{/* {user?.uid && ( */}
+			<li>
+				<NavLink to={'/dashboard'}>Dashboard</NavLink>
+			</li>
+			{/* // )} */}
 			{!user?.uid && (
 				<li>
 					<NavLink to={'/login'}>Login</NavLink>

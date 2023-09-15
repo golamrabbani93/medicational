@@ -5,6 +5,7 @@ import Main from '../../layouts/Main/Main';
 import Appointment from '../../Pages/Appointment/Appointment/Appointment';
 import SignUp from '../../Pages/Resgister/SignUp/SignUp';
 import DashBoard from '../../layouts/DashBoard/DashBoard';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
 	{
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/dashboard',
-		element: <DashBoard></DashBoard>,
+		element: (
+			<PrivateRoute>
+				<DashBoard></DashBoard>
+			</PrivateRoute>
+		),
 	},
 ]);
 export default router;

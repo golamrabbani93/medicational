@@ -5,6 +5,7 @@ import {AuthContext} from '../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
 const Navbar = () => {
 	const {user, logOut} = useContext(AuthContext);
+	console.log('🚀🚀: Navbar -> user', user);
 	const navlink = (
 		<>
 			<li>
@@ -76,12 +77,16 @@ const Navbar = () => {
 			{/* user avater section */}
 			{user?.uid && (
 				<div className="dropdown dropdown-end">
-					<label tabIndex={0} className="btn btn-outline btn-circle avatar onlin">
+					<label tabIndex={0} className="btn btn-outline btn-circle avatar online">
 						<div className="w-10 rounded-full">
-							{/* <img alt="" src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
-							<div className="flex justify-center items-center h-full">
-								<FaUserAlt className=""></FaUserAlt>
-							</div>
+							{user?.photoURL ? (
+								<img alt="" src={user?.photoURL} />
+							) : (
+								<div className="flex justify-center items-center h-full">
+									<FaUserAlt className=""></FaUserAlt>
+								</div>
+							)}
+							{/*  */}
 						</div>
 					</label>
 					<ul
@@ -94,7 +99,7 @@ const Navbar = () => {
 
 						<li>
 							<button onClick={() => UserLogOut()} className="justify-between">
-								Log Out{' '}
+								Log Out
 							</button>
 						</li>
 					</ul>

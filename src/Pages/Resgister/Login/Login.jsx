@@ -6,7 +6,7 @@ import {toast} from 'react-hot-toast';
 
 const Login = () => {
 	// !get sign up from auth provider
-	const {userSignIn} = useContext(AuthContext);
+	const {userSignIn, googleSignIn} = useContext(AuthContext);
 	let navigate = useNavigate();
 	let location = useLocation();
 	let from = location.state?.from?.pathname || '/';
@@ -26,6 +26,17 @@ const Login = () => {
 			})
 			.catch((err) => {
 				toast.error('Login Faild');
+			});
+	};
+	// ! sign in with google acount
+	const handleGoogleSignUp = () => {
+		googleSignIn()
+			.then((result) => {
+				toast.success('Sign In Complete');
+				navigate(from, {replace: true});
+			})
+			.catch((err) => {
+				toast.error('Sign In Faild');
 			});
 	};
 
@@ -80,7 +91,9 @@ const Login = () => {
 								</Link>
 							</h3>
 							<div className="divider">OR</div>
-							<button className="btn btn-outline btn-accent w-full">CONTINUE WITH GOOGLE</button>
+							<button onClick={handleGoogleSignUp} className="btn btn-outline btn-accent w-full">
+								CONTINUE WITH GOOGLE
+							</button>
 						</div>
 					</div>
 				</div>

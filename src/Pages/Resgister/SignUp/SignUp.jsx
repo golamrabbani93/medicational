@@ -6,13 +6,14 @@ import {toast} from 'react-hot-toast';
 
 const SignUp = () => {
 	// !get sign up from auth provider
-	const {userSignUp, updateUser} = useContext(AuthContext);
+	const {userSignUp, updateUser, googleSignIn} = useContext(AuthContext);
 	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: {errors},
 	} = useForm();
+	//! sign up with email and password
 	const handleSignUp = (data) => {
 		userSignUp(data.email, data.password)
 			.then((result) => {
@@ -32,6 +33,17 @@ const SignUp = () => {
 				// const message = err.message;
 				// const newMessage = message.split('/')[1];
 				// const removeLast3 = newMessage.substring(0, newMessage.length - 2);
+				toast.error('Sign Up Faild');
+			});
+	};
+
+	// ! sign in with google acount
+	const handleGoogleSignUp = () => {
+		googleSignIn()
+			.then((result) => {
+				toast.success('Sign Up Complete');
+			})
+			.catch((err) => {
 				toast.error('Sign Up Faild');
 			});
 	};
@@ -97,7 +109,9 @@ const SignUp = () => {
 								</Link>
 							</h3>
 							<div className="divider">OR</div>
-							<button className="btn btn-outline btn-accent w-full">CONTINUE WITH GOOGLE</button>
+							<button onClick={handleGoogleSignUp} className="btn btn-outline btn-accent w-full">
+								CONTINUE WITH GOOGLE
+							</button>
 						</div>
 					</div>
 				</div>

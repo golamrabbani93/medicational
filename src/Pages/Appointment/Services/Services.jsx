@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import SingleService from './SingleService';
 import BookingModal from './BookingModal/BookingModal';
 import {useQuery} from 'react-query';
+import Loader from '../../Shared/Loader/Loader';
 
 const Services = ({selectedDate}) => {
 	// load Single appointment services
@@ -21,7 +22,7 @@ const Services = ({selectedDate}) => {
 		},
 	});
 	if (isLoading) {
-		return <div>Loading</div>;
+		return <Loader></Loader>;
 	}
 	return (
 		<div>

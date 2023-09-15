@@ -9,7 +9,7 @@ const Services = ({selectedDate}) => {
 	const [service, setService] = useState(null);
 
 	const {data: services = [], isLoading} = useQuery({
-		queryKey: ['products'],
+		queryKey: ['appointment'],
 		queryFn: async () => {
 			const res = await fetch('http://localhost:5000/appointment');
 			const data = await res.json();

@@ -1,25 +1,40 @@
 import {format} from 'date-fns';
 import React, {useContext} from 'react';
 import {AuthContext} from '../../../../Contexts/AuthProvider';
+import {toast} from 'react-hot-toast';
 
 const BookingModal = ({service, setService, selectedDate}) => {
 	// !user data
 	const {user} = useContext(AuthContext);
-	console.log('🚀🚀: BookingModal -> user', user);
 	const {name, slots} = service;
 	const date = format(selectedDate, 'PP');
 	const bookingData = (e) => {
 		e.preventDefault();
-		const data = e.target;
+		const form = e.target;
 		const appointmentDetails = {
 			date: date,
 			treatment: name,
-			name: data.name.value,
-			phone: data.phone.value,
-			email: data.email.value,
+			name: form.name.value,
+			email: form.email.value,
+			phone: form.phone.value,
+			slot: form.slot.value,
 		};
-		setService(null);
-		console.log('🚀🚀: bookingData -> appointmentDetails', appointmentDetails);
+		fetch('http://localhost:5000/booking', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(appointmentDetails),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.data._id) {
+					toast.success(`${data.message}`);
+					setService(null);
+				} else {
+					toast.error(data.data.message);
+				}
+			});
 	};
 	return (
 		<div>
@@ -35,9 +50,23 @@ const BookingModal = ({service, setService, selectedDate}) => {
 					<form onSubmit={bookingData} className="grid grid-cols-1 gap-6 mt-10">
 						<input
 							type="text"
-							placeholder={date}
+							defaultValue={date}
 							className="input input-bordered w-full bg-accent"
-							readOnly={true}
+							disabled
+						/>
+						<input
+							name="name"
+							type="text"
+							defaultValue={user?.displayName}
+							className="input input-bordered w-full"
+							disabled
+						/>
+						<input
+							name="email"
+							type="email"
+							defaultValue={user?.email}
+							className="input input-bordered w-full"
+							disabled
 						/>
 						<select name="slot" className="select select-bordered w-full">
 							{slots.map((slot, ind) => (
@@ -46,24 +75,15 @@ const BookingModal = ({service, setService, selectedDate}) => {
 								</option>
 							))}
 						</select>
-						<input
-							name="name"
-							type="text"
-							placeholder="Full Name"
-							className="input input-bordered w-full"
-						/>
+
 						<input
 							name="phone"
-							type="text"
+							type="number"
 							placeholder="Phone Number"
 							className="input input-bordered w-full"
+							required
 						/>
-						<input
-							name="email"
-							type="email"
-							placeholder="Email"
-							className="input input-bordered w-full"
-						/>
+
 						<input type="submit" value={'submit'} className="btn btn-accent uppercase" />
 					</form>
 				</div>

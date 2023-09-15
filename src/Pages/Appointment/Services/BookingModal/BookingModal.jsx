@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
 
-const BookingModal = ({service, setService, selectedDate}) => {
+const BookingModal = ({service, setService, selectedDate, refetch}) => {
 	// !user data
 	const {user} = useContext(AuthContext);
 	const {name, slots} = service;
@@ -31,6 +31,7 @@ const BookingModal = ({service, setService, selectedDate}) => {
 				if (data.data._id) {
 					toast.success(`${data.message}`);
 					setService(null);
+					refetch();
 				} else {
 					toast.error(data.data.message);
 				}

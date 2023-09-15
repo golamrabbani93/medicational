@@ -7,11 +7,15 @@ import {useQuery} from 'react-query';
 const Services = ({selectedDate}) => {
 	// load Single appointment services
 	const [service, setService] = useState(null);
-
-	const {data: services = [], isLoading} = useQuery({
-		queryKey: ['appointment'],
+	const date = format(selectedDate, 'PP');
+	const {
+		data: services = [],
+		isLoading,
+		refetch,
+	} = useQuery({
+		queryKey: ['appointment', date],
 		queryFn: async () => {
-			const res = await fetch('http://localhost:5000/appointment');
+			const res = await fetch(`http://localhost:5000/appointment?date=${date}`);
 			const data = await res.json();
 			return data;
 		},
@@ -23,7 +27,7 @@ const Services = ({selectedDate}) => {
 		<div>
 			<div className="mt-10 lg:mt-14">
 				<p className="text-secondary font-bold text-2xl text-center">
-					Available Appointments on {format(selectedDate, 'PP')}
+					Available Appointments on {date}
 				</p>
 			</div>
 			<div className="lg:mt-[100px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-8">
@@ -41,6 +45,7 @@ const Services = ({selectedDate}) => {
 					service={service}
 					setService={setService}
 					selectedDate={selectedDate}
+					refetch={refetch}
 				></BookingModal>
 			)}
 		</div>

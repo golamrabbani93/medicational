@@ -4,6 +4,7 @@ import Login from '../../Pages/Resgister/Login/Login';
 import Main from '../../layouts/Main/Main';
 import Appointment from '../../Pages/Appointment/Appointment/Appointment';
 import SignUp from '../../Pages/Resgister/SignUp/SignUp';
+import DashBoard from '../../layouts/DashBoard/DashBoard';
 
 const router = createBrowserRouter([
 	{
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
 				element: <SignUp></SignUp>,
 			},
 		],
+	},
+	{
+		path: '/dashboard',
+		element: <DashBoard></DashBoard>,
 	},
 ]);
 export default router;

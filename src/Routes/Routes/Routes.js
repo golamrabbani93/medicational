@@ -4,8 +4,9 @@ import Login from '../../Pages/Resgister/Login/Login';
 import Main from '../../layouts/Main/Main';
 import Appointment from '../../Pages/Appointment/Appointment/Appointment';
 import SignUp from '../../Pages/Resgister/SignUp/SignUp';
-import DashBoard from '../../layouts/DashBoard/DashBoard';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import DashBoardLayout from '../../layouts/DashBoardLayout/DashBoardLayout';
+import DashBoard from '../../Pages/Dashboard/DashBoard/DashBoard';
 
 const router = createBrowserRouter([
 	{
@@ -34,9 +35,15 @@ const router = createBrowserRouter([
 		path: '/dashboard',
 		element: (
 			<PrivateRoute>
-				<DashBoard></DashBoard>
+				<DashBoardLayout></DashBoardLayout>
 			</PrivateRoute>
 		),
+		children: [
+			{
+				path: '/dashboard',
+				element: <DashBoard></DashBoard>,
+			},
+		],
 	},
 ]);
 export default router;

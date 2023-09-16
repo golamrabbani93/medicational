@@ -5,7 +5,6 @@ import {AuthContext} from '../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
 const Navbar = () => {
 	const {user, logOut} = useContext(AuthContext);
-	console.log('🚀🚀: Navbar -> user', user);
 	const navlink = (
 		<>
 			<li>

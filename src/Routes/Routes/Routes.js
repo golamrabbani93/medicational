@@ -7,6 +7,7 @@ import SignUp from '../../Pages/Resgister/SignUp/SignUp';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import DashBoardLayout from '../../layouts/DashBoardLayout/DashBoardLayout';
 import DashBoard from '../../Pages/Dashboard/DashBoard/DashBoard';
+import MyAppointment from '../../Pages/Dashboard/MyAppointment/MyAppointment';
 
 const router = createBrowserRouter([
 	{
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
 			{
 				path: '/dashboard',
 				element: <DashBoard></DashBoard>,
+			},
+			{
+				path: '/dashboard/myappointments',
+				element: <MyAppointment></MyAppointment>,
 			},
 		],
 	},

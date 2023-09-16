@@ -10,6 +10,11 @@ const DashBoardLayout = () => {
 					Dashboard
 				</NavLink>
 			</li>
+			<li>
+				<NavLink to={'/dashboard/myappointments'} end>
+					My Appointments
+				</NavLink>
+			</li>
 		</>
 	);
 	return (
@@ -35,7 +40,6 @@ const DashBoardLayout = () => {
 							></path>
 						</svg>
 					</label>
-
 					<Outlet></Outlet>
 				</div>
 				<div className="drawer-side">

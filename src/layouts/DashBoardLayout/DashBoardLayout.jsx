@@ -10,9 +10,9 @@ const DashBoardLayout = () => {
 					Dashboard
 				</NavLink>
 			</li>
-			<li>
+			<li className="mt-2">
 				<NavLink to={'/dashboard/myappointments'} end>
-					My Appointments
+					My Appointment
 				</NavLink>
 			</li>
 		</>
@@ -20,7 +20,7 @@ const DashBoardLayout = () => {
 	return (
 		<div>
 			<Navbar></Navbar>
-			<div className="drawer lg:drawer-open">
+			<div className="drawer lg:drawer-open lg:w-[1440px] m-auto">
 				<input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 				<div className="drawer-content">
 					<label htmlFor="dashboard-drawer" tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -40,9 +40,11 @@ const DashBoardLayout = () => {
 							></path>
 						</svg>
 					</label>
-					<Outlet></Outlet>
+					<div className="ml-14 mt-12">
+						<Outlet></Outlet>
+					</div>
 				</div>
-				<div className="drawer-side">
+				<div className="drawer-side rounded">
 					<label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
 					<ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
 						{/* Sidebar content here */}

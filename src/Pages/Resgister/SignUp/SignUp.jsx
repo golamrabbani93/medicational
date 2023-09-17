@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
+import UsePostUser from '../../../hooks/UsePostUser';
 
 const SignUp = () => {
 	// !get sign up from auth provider
@@ -19,7 +20,8 @@ const SignUp = () => {
 			.then((result) => {
 				reset();
 				toast.success('Sign Up Complete');
-
+				//!Post User TO database
+				UsePostUser(data.name, data.email);
 				//! user Name Update start
 				const userinfo = {
 					displayName: data.name,

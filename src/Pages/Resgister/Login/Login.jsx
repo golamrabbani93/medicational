@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
 import UsePostUser from '../../../hooks/UsePostUser';
+import UseToken from '../../../hooks/UseToken';
 
 const Login = () => {
 	// !get sign up from auth provider
@@ -12,6 +13,14 @@ const Login = () => {
 	let location = useLocation();
 	let from = location.state?.from?.pathname || '/';
 
+	// !get jwt token and navigate
+	const [userEmail, setUserEmail] = useState('');
+	const [token] = UseToken(userEmail);
+	useEffect(() => {
+		if (token) {
+			navigate(from, {replace: true});
+		}
+	}, [token, navigate, from]);
 	const {
 		register,
 		handleSubmit,
@@ -23,7 +32,7 @@ const Login = () => {
 			.then((result) => {
 				reset();
 				toast.success('Login Complete');
-				navigate(from, {replace: true});
+				setUserEmail(result.user.email);
 			})
 			.catch((err) => {
 				toast.error('Login Faild');
@@ -35,7 +44,7 @@ const Login = () => {
 			.then((result) => {
 				toast.success('Sign In Complete');
 				UsePostUser(result.user.displayName, result.user.email);
-				navigate(from, {replace: true});
+				setUserEmail(result.user.email);
 			})
 			.catch((err) => {
 				toast.error('Sign In Faild');

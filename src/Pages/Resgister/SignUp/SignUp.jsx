@@ -43,6 +43,7 @@ const SignUp = () => {
 	const handleGoogleSignUp = () => {
 		googleSignIn()
 			.then((result) => {
+				UsePostUser(result.user.displayName, result.user.email);
 				toast.success('Sign Up Complete');
 			})
 			.catch((err) => {

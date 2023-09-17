@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
+import UsePostUser from '../../../hooks/UsePostUser';
 
 const Login = () => {
 	// !get sign up from auth provider
@@ -33,6 +34,7 @@ const Login = () => {
 		googleSignIn()
 			.then((result) => {
 				toast.success('Sign In Complete');
+				UsePostUser(result.user.displayName, result.user.email);
 				navigate(from, {replace: true});
 			})
 			.catch((err) => {

@@ -1,11 +1,21 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
 import UsePostUser from '../../../hooks/UsePostUser';
+import UseToken from '../../../hooks/UseToken';
 
 const SignUp = () => {
+	// !get jwt token and navigate to home page
+	const navigate = useNavigate();
+	const [userEmail, setUserEmail] = useState();
+	const [token] = UseToken(userEmail);
+	useEffect(() => {
+		if (token) {
+			navigate('/');
+		}
+	}, [token, navigate]);
 	// !get sign up from auth provider
 	const {userSignUp, updateUser, googleSignIn} = useContext(AuthContext);
 	const {
@@ -18,10 +28,11 @@ const SignUp = () => {
 	const handleSignUp = (data) => {
 		userSignUp(data.email, data.password)
 			.then((result) => {
-				reset();
 				toast.success('Sign Up Complete');
 				//!Post User TO database
 				UsePostUser(data.name, data.email);
+				// !Set User Email For Token
+				setUserEmail(data.email);
 				//! user Name Update start
 				const userinfo = {
 					displayName: data.name,
@@ -30,6 +41,7 @@ const SignUp = () => {
 					.then(() => {})
 					.catch((err) => console.log(err));
 				// //! user Name Update end
+				reset();
 			})
 			.catch((err) => {
 				// const message = err.message;
@@ -43,13 +55,17 @@ const SignUp = () => {
 	const handleGoogleSignUp = () => {
 		googleSignIn()
 			.then((result) => {
+				//!Post User TO database
 				UsePostUser(result.user.displayName, result.user.email);
+				// !Set User Email For Token
+				setUserEmail(result.user.email);
 				toast.success('Sign Up Complete');
 			})
 			.catch((err) => {
 				toast.error('Sign Up Faild');
 			});
 	};
+
 	return (
 		<div>
 			<div className="hero min-h-screen">

@@ -2,6 +2,7 @@ import React from 'react';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
 import {useNavigate} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const AllUsers = () => {
 	const navigate = useNavigate();
@@ -25,6 +26,22 @@ const AllUsers = () => {
 	if (isLoading) {
 		return <Loader></Loader>;
 	}
+
+	// !make Admin
+	const makeAdmin = (id) => {
+		const adminAPI = `http://localhost:5000/users/admin/${id}`;
+		fetch(adminAPI, {
+			method: 'PUT',
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('Token')}`,
+				'content-type': 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				toast.success(data.message);
+			});
+	};
 	return (
 		<div>
 			<div>
@@ -50,7 +67,12 @@ const AllUsers = () => {
 									<td>{user?.name}</td>
 									<td>{user?.email}</td>
 									<td>
-										<button className="btn btn-sm btn-secondary">Make Admin</button>
+										<button
+											onClick={() => makeAdmin(user._id)}
+											className="btn btn-sm btn-secondary"
+										>
+											Make Admin
+										</button>
 									</td>
 									<td>
 										<button className="btn btn-sm bg-red-500 hover:bg-red-700 text-white ">

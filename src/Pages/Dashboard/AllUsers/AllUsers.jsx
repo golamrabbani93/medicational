@@ -1,14 +1,23 @@
 import React from 'react';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
+import {useNavigate} from 'react-router-dom';
 
 const AllUsers = () => {
+	const navigate = useNavigate();
 	// !!get all user to database
 	const userApi = `http://localhost:5000/users`;
 	const {data: users = [], isLoading} = useQuery({
 		queryKey: [],
 		queryFn: async () => {
-			const res = await fetch(userApi);
+			const res = await fetch(userApi, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('Token')}`,
+				},
+			});
+			if (res.status === 403) {
+				navigate('/login');
+			}
 			const data = res.json();
 			return data;
 		},

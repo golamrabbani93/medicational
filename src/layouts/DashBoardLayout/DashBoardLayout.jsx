@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
 import {NavLink, Outlet} from 'react-router-dom';
+import {AuthContext} from '../../Contexts/AuthProvider';
+import UseAdmin from '../../hooks/UseAdmin';
 
 const DashBoardLayout = () => {
+	const {user} = useContext(AuthContext);
+	const [admin] = UseAdmin(user?.email);
 	const dashboardLink = (
 		<>
 			<li>
@@ -15,11 +19,13 @@ const DashBoardLayout = () => {
 					My Appointment
 				</NavLink>
 			</li>
-			<li className="mt-2">
-				<NavLink to={'/dashboard/allusers'} end>
-					All Users
-				</NavLink>
-			</li>
+			{admin && (
+				<li className="mt-2">
+					<NavLink to={'/dashboard/allusers'} end>
+						All Users
+					</NavLink>
+				</li>
+			)}
 		</>
 	);
 	return (

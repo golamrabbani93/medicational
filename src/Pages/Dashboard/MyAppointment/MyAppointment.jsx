@@ -50,7 +50,7 @@ const MyAppointment = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{userBookings.data > 0 ? (
+							{userBookings.data.length > 0 ? (
 								userBookings?.data?.map((booking, ind) => (
 									<tr key={booking._id}>
 										<th>{ind + 1}</th>

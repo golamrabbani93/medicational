@@ -15,6 +15,11 @@ const DashBoardLayout = () => {
 					My Appointment
 				</NavLink>
 			</li>
+			<li className="mt-2">
+				<NavLink to={'/dashboard/allusers'} end>
+					All Users
+				</NavLink>
+			</li>
 		</>
 	);
 	return (

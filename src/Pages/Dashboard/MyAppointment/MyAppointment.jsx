@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const MyAppointment = () => {
 	const navigate = useNavigate();
@@ -50,15 +50,30 @@ const MyAppointment = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{userBookings.data.map((booking, ind) => (
-								<tr key={booking._id}>
-									<th>{ind + 1}</th>
-									<td>{booking?.name}</td>
-									<td>{booking?.treatment}</td>
-									<td>{booking?.slot}</td>
-									<td>{booking?.date}</td>
+							{userBookings.data > 0 ? (
+								userBookings?.data?.map((booking, ind) => (
+									<tr key={booking._id}>
+										<th>{ind + 1}</th>
+										<td>{booking?.name}</td>
+										<td>{booking?.treatment}</td>
+										<td>{booking?.slot}</td>
+										<td>{booking?.date}</td>
+									</tr>
+								))
+							) : (
+								<tr>
+									<th></th>
+									<th className="text-center mt-10">
+										You have no appointment{' '}
+										<Link
+											to="/appointment"
+											className="label-text-alt link link-hover text-secondary"
+										>
+											Get Appointment
+										</Link>
+									</th>
 								</tr>
-							))}
+							)}
 						</tbody>
 					</table>
 				</div>

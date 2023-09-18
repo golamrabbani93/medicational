@@ -3,7 +3,7 @@ const UsePostUser = (name, email) => {
 		name: name,
 		email: email,
 	};
-	fetch('http://localhost:5000/user', {
+	fetch('http://localhost:5000/users', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

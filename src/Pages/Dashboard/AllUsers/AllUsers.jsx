@@ -1,17 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
 import {useNavigate} from 'react-router-dom';
 import toast from 'react-hot-toast';
-import UseAdmin from '../../../hooks/UseAdmin';
-import {AuthContext} from '../../../Contexts/AuthProvider';
 
 const AllUsers = () => {
 	const navigate = useNavigate();
-	const {user} = useContext(AuthContext);
-	// !check Admin
-	const [admin] = UseAdmin(user?.email);
-	console.log('🚀🚀: AllUsers -> admin', admin);
 	// !!get all user to database
 	const userApi = `http://localhost:5000/users`;
 	const {

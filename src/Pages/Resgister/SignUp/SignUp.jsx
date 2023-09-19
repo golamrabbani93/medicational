@@ -10,7 +10,9 @@ const SignUp = () => {
 	// !get jwt token and navigate to home page
 	const navigate = useNavigate();
 	const [userEmail, setUserEmail] = useState();
+	console.log('🚀🚀: SignUp -> userEmail', userEmail);
 	const [token] = UseToken(userEmail);
+	console.log('🚀🚀: SignUp -> token', token);
 	useEffect(() => {
 		if (token) {
 			navigate('/');
@@ -31,22 +33,20 @@ const SignUp = () => {
 				toast.success('Sign Up Complete');
 				//!Post User TO database
 				UsePostUser(data.name, data.email);
-				// !Set User Email For Token
-				setUserEmail(data.email);
 				//! user Name Update start
 				const userinfo = {
 					displayName: data.name,
 				};
 				updateUser(userinfo)
-					.then(() => {})
+					.then(() => {
+						// !Set User Email For Token
+						setUserEmail(data.email);
+					})
 					.catch((err) => console.log(err));
 				// //! user Name Update end
 				reset();
 			})
 			.catch((err) => {
-				// const message = err.message;
-				// const newMessage = message.split('/')[1];
-				// const removeLast3 = newMessage.substring(0, newMessage.length - 2);
 				toast.error('Sign Up Faild');
 			});
 	};

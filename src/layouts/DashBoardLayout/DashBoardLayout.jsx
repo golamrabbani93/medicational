@@ -14,11 +14,13 @@ const DashBoardLayout = () => {
 					Dashboard
 				</NavLink>
 			</li>
-			<li className="mt-2">
-				<NavLink to={'/dashboard/myappointments'} end>
-					My Appointment
-				</NavLink>
-			</li>
+			{!admin && (
+				<li className="mt-2">
+					<NavLink to={'/dashboard/myappointments'} end>
+						My Appointment
+					</NavLink>
+				</li>
+			)}
 			{admin && (
 				<li className="mt-2">
 					<NavLink to={'/dashboard/allusers'} end>

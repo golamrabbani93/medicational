@@ -22,11 +22,18 @@ const DashBoardLayout = () => {
 				</li>
 			)}
 			{admin && (
-				<li className="mt-2">
-					<NavLink to={'/dashboard/allusers'} end>
-						All Users
-					</NavLink>
-				</li>
+				<>
+					<li className="mt-2">
+						<NavLink to={'/dashboard/allusers'} end>
+							All Users
+						</NavLink>
+					</li>
+					<li className="mt-2">
+						<NavLink to={'/dashboard/adddoctor'} end>
+							Add Doctor
+						</NavLink>
+					</li>
+				</>
 			)}
 		</>
 	);

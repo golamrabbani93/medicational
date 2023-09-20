@@ -4,6 +4,7 @@ import gallery from '../../../assets/icons/gallery 1.svg';
 import './AddDoctor.css';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
+import toast from 'react-hot-toast';
 
 const AddDoctor = () => {
 	const [fileName, setFileName] = useState('Upload Your Photo');
@@ -23,18 +24,35 @@ const AddDoctor = () => {
 		const image = data.image[0];
 		const formData = new FormData();
 		formData.append('image', image);
-		console.log('🚀🚀: handleLogin -> formData', formData);
 		fetch(`https://api.imgbb.com/1/upload?expiration=600&key=${ImgBBApi}`, {
 			method: 'POST',
 			body: formData,
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				console.log('🚀🚀: handleLogin -> result', result);
+				if (result.success) {
+					const doctorData = {
+						name: data.name,
+						email: data.email,
+						speciality: data.speciality,
+						image: result.data.url,
+					};
+					fetch('http://localhost:5000/doctor', {
+						method: 'POST',
+						headers: {
+							authorization: `bearer ${localStorage.getItem('Token')}`,
+							'content-type': 'application/json',
+						},
+						body: JSON.stringify(doctorData),
+					})
+						.then((res) => res.json())
+						.then((data) => {
+							toast.success('Doctor Data Insterted');
+							setFileName('Upload Your Photo');
+							reset();
+						});
+				}
 			});
-
-		setFileName('Upload Your Photo');
-		reset();
 	};
 	// !get Doctor specialities
 	const {data: specialities = [], isLoading} = useQuery({

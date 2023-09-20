@@ -101,6 +101,9 @@ const AddDoctor = () => {
 						/>
 						{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 					</div>
+					<label className="label">
+						<span className="label-text">Speciality</span>
+					</label>
 					<select
 						{...register('speciality', {required: 'speciality is required'})}
 						className="select select-bordered w-full"
@@ -111,7 +114,7 @@ const AddDoctor = () => {
 							</option>
 						))}
 					</select>
-					{errors.email && <span className="text-red-600">{errors.email.message}</span>}
+
 					<div className="form-control mt-2">
 						<div className="dropzone">
 							<h2 className="text-center mt-6 text-[#9E9C9C]">{fileName}</h2>
@@ -127,8 +130,8 @@ const AddDoctor = () => {
 								className="upload-input"
 							/>
 						</div>
-						{errors.image && <span className="text-red-600">{errors.image.message}</span>}
 					</div>
+					{errors.image && <span className="text-red-600">{errors.image.message}</span>}
 					<div className="form-control mt-6">
 						<button className="btn btn-accent">Login</button>
 					</div>

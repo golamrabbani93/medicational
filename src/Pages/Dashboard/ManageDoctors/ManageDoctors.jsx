@@ -50,7 +50,7 @@ const ManageDoctors = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{doctors &&
+							{doctors.data.length > 0 &&
 								doctors.data.map((doctor, ind) => (
 									<tr key={doctor._id}>
 										<td>{ind + 1}</td>

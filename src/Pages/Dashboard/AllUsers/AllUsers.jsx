@@ -28,7 +28,7 @@ const AllUsers = () => {
 				logOut();
 				<Navigate to="/login" state={{from: location}} replace />;
 			}
-			const data = res.json();
+			const data = await res.json();
 			return data;
 		},
 	});

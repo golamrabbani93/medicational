@@ -33,6 +33,11 @@ const DashBoardLayout = () => {
 							Add Doctor
 						</NavLink>
 					</li>
+					<li className="mt-2">
+						<NavLink to={'/dashboard/managedoctors'} end>
+							Manage Doctors
+						</NavLink>
+					</li>
 				</>
 			)}
 		</>

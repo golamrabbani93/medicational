@@ -11,6 +11,7 @@ const AddDoctor = () => {
 		const files = e.target.files[0].name;
 		setFileName(files);
 	};
+	const ImgBBApi = process.env.REACT_APP_ImgBBApi;
 	// !get New Doctor Form Data
 	const {
 		register,
@@ -19,7 +20,19 @@ const AddDoctor = () => {
 		formState: {errors},
 	} = useForm();
 	const handleLogin = (data) => {
-		console.log(data);
+		const image = data.image[0];
+		const formData = new FormData();
+		formData.append('image', image);
+		console.log('🚀🚀: handleLogin -> formData', formData);
+		fetch(`https://api.imgbb.com/1/upload?expiration=600&key=${ImgBBApi}`, {
+			method: 'POST',
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				console.log('🚀🚀: handleLogin -> result', result);
+			});
+
 		setFileName('Upload Your Photo');
 		reset();
 	};

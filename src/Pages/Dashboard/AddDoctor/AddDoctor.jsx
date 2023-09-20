@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import gallery from '../../../assets/icons/gallery 1.svg';
 import './AddDoctor.css';
 
 const AddDoctor = () => {
+	const [fileName, setFileName] = useState('Upload Your Photo');
+	const imgLoad = (e) => {
+		const files = e.target.files[0].name;
+		setFileName(files);
+	};
+
 	const {
 		register,
 		handleSubmit,
-
+		reset,
 		formState: {errors},
 	} = useForm();
 	const handleLogin = (data) => {
 		console.log(data);
+		setFileName('Upload Your Photo');
+		reset();
 	};
 	return (
 		<div>
@@ -46,12 +54,14 @@ const AddDoctor = () => {
 					</div>
 					<div className="form-control mt-2">
 						<div className="dropzone">
-							<h2 className="text-center mt-6 text-[#9E9C9C]">Upload Your Photo</h2>
+							<h2 className="text-center mt-6 text-[#9E9C9C]">{fileName}</h2>
+
 							<img className="m-auto mt-3" alt="" src={gallery} />
 							<input
 								{...register('image', {
 									required: 'Image is required',
 								})}
+								onChange={(e) => imgLoad(e)}
 								type="file"
 								placeholder="image"
 								className="upload-input"

@@ -7,13 +7,14 @@ import Loader from '../../Shared/Loader/Loader';
 import toast from 'react-hot-toast';
 
 const AddDoctor = () => {
+	//! image upload text function
 	const [fileName, setFileName] = useState('Upload Your Photo');
 	const imgLoad = (e) => {
 		const files = e.target.files[0].name;
 		setFileName(files);
 	};
 	const ImgBBApi = process.env.REACT_APP_ImgBBApi;
-	// !get New Doctor Form Data
+	// !get Doctor Form Data
 	const {
 		register,
 		handleSubmit,
@@ -24,6 +25,7 @@ const AddDoctor = () => {
 		const image = data.image[0];
 		const formData = new FormData();
 		formData.append('image', image);
+		// !img Upload Url
 		fetch(`https://api.imgbb.com/1/upload?expiration=600&key=${ImgBBApi}`, {
 			method: 'POST',
 			body: formData,
@@ -37,6 +39,7 @@ const AddDoctor = () => {
 						speciality: data.speciality,
 						image: result.data.url,
 					};
+					// ! Doctor Data post Url
 					fetch('http://localhost:5000/doctor', {
 						method: 'POST',
 						headers: {

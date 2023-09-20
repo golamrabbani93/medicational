@@ -2,12 +2,13 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, Navigate, useLocation} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const MyAppointment = () => {
-	const navigate = useNavigate();
+	const location = useLocation();
 	// !get loged in User
-	const {user} = useContext(AuthContext);
+	const {user, logOut} = useContext(AuthContext);
 
 	// !create bookings Api
 	const bookingUrl = `http://localhost:5000/booking?email=${user?.email}`;
@@ -21,8 +22,11 @@ const MyAppointment = () => {
 					authorization: `Bearer ${localStorage.getItem('Token')}`,
 				},
 			});
+			//! Token Expired
 			if (res.status === 403) {
-				navigate('/login');
+				toast.error('Token Expired');
+				logOut();
+				<Navigate to="/login" state={{from: location}} replace />;
 			}
 			const data = await res.json();
 			return data;
@@ -50,7 +54,7 @@ const MyAppointment = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{userBookings.data.length > 0 ? (
+							{userBookings?.data?.length > 0 ? (
 								userBookings?.data?.map((booking, ind) => (
 									<tr key={booking._id}>
 										<th>{ind + 1}</th>

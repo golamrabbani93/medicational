@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
-import {useNavigate} from 'react-router-dom';
+import {Navigate, useLocation} from 'react-router-dom';
 import toast from 'react-hot-toast';
+import {AuthContext} from '../../../Contexts/AuthProvider';
 
 const AllUsers = () => {
-	const navigate = useNavigate();
+	const {logOut} = useContext(AuthContext);
+	const location = useLocation();
 	// !!get all user to database
 	const userApi = `http://localhost:5000/users`;
 	const {
@@ -20,8 +22,11 @@ const AllUsers = () => {
 					authorization: `Bearer ${localStorage.getItem('Token')}`,
 				},
 			});
+			//! Token Expired
 			if (res.status === 403) {
-				navigate('/login');
+				toast.error('Token Expired');
+				logOut();
+				<Navigate to="/login" state={{from: location}} replace />;
 			}
 			const data = res.json();
 			return data;

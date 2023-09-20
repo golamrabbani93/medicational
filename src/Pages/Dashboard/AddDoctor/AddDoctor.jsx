@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import gallery from '../../../assets/icons/gallery 1.svg';
 import './AddDoctor.css';
+import {useQuery} from 'react-query';
+import Loader from '../../Shared/Loader/Loader';
 
 const AddDoctor = () => {
 	const [fileName, setFileName] = useState('Upload Your Photo');
@@ -9,7 +11,7 @@ const AddDoctor = () => {
 		const files = e.target.files[0].name;
 		setFileName(files);
 	};
-
+	// !get New Doctor Form Data
 	const {
 		register,
 		handleSubmit,
@@ -21,6 +23,19 @@ const AddDoctor = () => {
 		setFileName('Upload Your Photo');
 		reset();
 	};
+	// !get Doctor specialities
+	const {data: specialities = [], isLoading} = useQuery({
+		queryKey: ['specialities'],
+		queryFn: async () => {
+			const res = fetch('http://localhost:5000/doctor/specialities');
+			const data = (await res).json();
+			return data;
+		},
+	});
+	if (isLoading) {
+		return <Loader></Loader>;
+	}
+
 	return (
 		<div>
 			<div>
@@ -52,6 +67,17 @@ const AddDoctor = () => {
 						/>
 						{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 					</div>
+					<select
+						{...register('speciality', {required: 'speciality is required'})}
+						className="select select-bordered w-full"
+					>
+						{specialities?.data.map((speciality) => (
+							<option value={speciality.name} key={speciality._id}>
+								{speciality.name}
+							</option>
+						))}
+					</select>
+					{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 					<div className="form-control mt-2">
 						<div className="dropzone">
 							<h2 className="text-center mt-6 text-[#9E9C9C]">{fileName}</h2>

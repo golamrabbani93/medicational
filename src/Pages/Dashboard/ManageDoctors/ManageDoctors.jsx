@@ -1,13 +1,17 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import toast from 'react-hot-toast';
 import {useQuery} from 'react-query';
 import {Navigate, useLocation} from 'react-router-dom';
 import {AuthContext} from '../../../Contexts/AuthProvider';
 import Loader from '../../Shared/Loader/Loader';
+import ActionModal from '../../Shared/ActionModal/ActionModal';
 
 const ManageDoctors = () => {
 	const {logOut} = useContext(AuthContext);
 	const location = useLocation();
+	// !Set selected Doctor for delete
+	const [selectedDoctor, setSelectedDoctor] = useState({});
+	// !Doctor list get from database
 	const doctorsURl = 'http://localhost:5000/doctor';
 	const {data: doctors = [], isLoading} = useQuery({
 		queryKey: ['doctors'],
@@ -31,6 +35,11 @@ const ManageDoctors = () => {
 	if (isLoading) {
 		return <Loader></Loader>;
 	}
+
+	// !Delete Doctor
+	const deleteDoctor = (id) => {
+		console.log('🚀🚀: deleteDoctor -> id', id);
+	};
 	return (
 		<div>
 			<div>
@@ -69,9 +78,13 @@ const ManageDoctors = () => {
 										<td>{doctor.speciality}</td>
 										<td>{doctor.email}</td>
 										<td>
-											<button className="btn btn-sm bg-red-500 hover:bg-red-700 text-white ">
+											<label
+												htmlFor="action-modal"
+												onClick={() => setSelectedDoctor(doctor)}
+												className="btn btn-sm bg-red-500 hover:bg-red-700 text-white"
+											>
 												Delete
-											</button>
+											</label>
 										</td>
 									</tr>
 								))}
@@ -79,6 +92,11 @@ const ManageDoctors = () => {
 					</table>
 				</div>
 			</div>
+			<ActionModal
+				deletedItem={selectedDoctor}
+				cancelDelete={setSelectedDoctor}
+				deleteSuccess={deleteDoctor}
+			></ActionModal>
 		</div>
 	);
 };

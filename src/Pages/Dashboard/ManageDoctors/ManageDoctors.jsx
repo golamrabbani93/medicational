@@ -13,7 +13,11 @@ const ManageDoctors = () => {
 	const [selectedDoctor, setSelectedDoctor] = useState({});
 	// !Doctor list get from database
 	const doctorsURl = 'http://localhost:5000/doctor';
-	const {data: doctors = [], isLoading} = useQuery({
+	const {
+		data: doctors = [],
+		isLoading,
+		refetch,
+	} = useQuery({
 		queryKey: ['doctors'],
 		queryFn: async () => {
 			const res = await fetch(doctorsURl, {
@@ -37,8 +41,24 @@ const ManageDoctors = () => {
 	}
 
 	// !Delete Doctor
-	const deleteDoctor = (id) => {
-		console.log('🚀🚀: deleteDoctor -> id', id);
+	const deleteDoctor = async (id) => {
+		const deleteURL = `http://localhost:5000/doctor/${id}`;
+
+		try {
+			const res = await fetch(deleteURL, {
+				method: 'DELETE',
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('Token')}`,
+				},
+			});
+			const data = await res.json();
+			if (data.message) {
+				toast.success(data.message);
+				refetch();
+			}
+		} catch (error) {
+			toast.error('Delete Faild');
+		}
 	};
 	return (
 		<div>
@@ -92,6 +112,8 @@ const ManageDoctors = () => {
 					</table>
 				</div>
 			</div>
+
+			{/* Show modal for delete doctor */}
 			<ActionModal
 				deletedItem={selectedDoctor}
 				cancelDelete={setSelectedDoctor}

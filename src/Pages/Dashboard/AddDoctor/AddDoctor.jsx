@@ -133,7 +133,7 @@ const AddDoctor = () => {
 					</div>
 					{errors.image && <span className="text-red-600">{errors.image.message}</span>}
 					<div className="form-control mt-6">
-						<button className="btn btn-accent">Login</button>
+						<button className="btn btn-accent">Add Doctor</button>
 					</div>
 				</form>
 			</div>

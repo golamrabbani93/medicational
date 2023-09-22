@@ -10,9 +10,7 @@ const SignUp = () => {
 	// !get jwt token and navigate to home page
 	const navigate = useNavigate();
 	const [userEmail, setUserEmail] = useState();
-	console.log('🚀🚀: SignUp -> userEmail', userEmail);
 	const [token] = UseToken(userEmail);
-	console.log('🚀🚀: SignUp -> token', token);
 	useEffect(() => {
 		if (token) {
 			navigate('/');
@@ -82,6 +80,7 @@ const SignUp = () => {
 									type="text"
 									placeholder="name"
 									className="input input-bordered"
+									autoComplete="name"
 								/>
 								{errors.name && <span className="text-red-600">{errors.name.message}</span>}
 							</div>
@@ -94,6 +93,7 @@ const SignUp = () => {
 									type="text"
 									placeholder="email"
 									className="input input-bordered"
+									autoComplete="email"
 								/>
 								{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 							</div>
@@ -113,6 +113,7 @@ const SignUp = () => {
 									type="password"
 									placeholder="password"
 									className="input input-bordered"
+									autoComplete="password"
 								/>
 								{errors.password && <span className="text-red-600">{errors.password.message}</span>}
 							</div>

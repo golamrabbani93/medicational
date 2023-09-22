@@ -67,6 +67,7 @@ const Login = () => {
 									type="text"
 									placeholder="email"
 									className="input input-bordered"
+									autoComplete="email"
 								/>
 								{errors.email && <span className="text-red-600">{errors.email.message}</span>}
 							</div>
@@ -82,6 +83,7 @@ const Login = () => {
 									type="password"
 									placeholder="password"
 									className="input input-bordered"
+									autoComplete="password"
 								/>
 								{errors.password && <span className="text-red-600">{errors.password.message}</span>}
 								<label className="label">

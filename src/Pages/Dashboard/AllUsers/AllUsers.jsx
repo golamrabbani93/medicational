@@ -60,8 +60,24 @@ const AllUsers = () => {
 			});
 	};
 	// !Delete User
-	const deleteUser = (id) => {
-		console.log(id);
+	const deleteUser = async (id) => {
+		const deleteURL = `http://localhost:5000/users/${id}`;
+
+		try {
+			const res = await fetch(deleteURL, {
+				method: 'DELETE',
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('Token')}`,
+				},
+			});
+			const data = await res.json();
+			if (data.message) {
+				toast.success(data.message);
+				refetch();
+			}
+		} catch (error) {
+			toast.error('Delete Faild');
+		}
 	};
 	return (
 		<div>

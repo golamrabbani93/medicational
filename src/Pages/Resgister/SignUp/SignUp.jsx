@@ -56,7 +56,10 @@ const SignUp = () => {
 				//!Post User TO database
 				UsePostUser(result.user.displayName, result.user.email);
 				// !Set User Email For Token
-				setUserEmail(result.user.email);
+				setTimeout(() => {
+					setUserEmail(result.user.email);
+				}, 500);
+
 				toast.success('Sign Up Complete');
 			})
 			.catch((err) => {

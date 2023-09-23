@@ -44,7 +44,10 @@ const Login = () => {
 			.then((result) => {
 				toast.success('Sign In Complete');
 				UsePostUser(result.user.displayName, result.user.email);
-				setUserEmail(result.user.email);
+				// !Set User Email For Token
+				setTimeout(() => {
+					setUserEmail(result.user.email);
+				}, 500);
 			})
 			.catch((err) => {
 				toast.error('Sign In Faild');

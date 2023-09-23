@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 
 const UseAdmin = (email) => {
 	const [admin, setAdmin] = useState(false);
+	const [mainAdmin, setMainAdmin] = useState(false);
 	const [adminLoading, setAdminLoading] = useState(true);
 	useEffect(() => {
 		if (email) {
@@ -9,7 +10,8 @@ const UseAdmin = (email) => {
 				try {
 					const res = await fetch(`http://localhost:5000/users/admin/${email}`);
 					const data = await res.json();
-					setAdmin(data.Admin);
+					setAdmin(data.admin);
+					setMainAdmin(data.main);
 					setAdminLoading(false);
 				} catch (error) {
 					console.log(error, 'C');
@@ -18,7 +20,13 @@ const UseAdmin = (email) => {
 			fetchAdmin();
 		}
 	}, [email]);
-	return [admin, adminLoading];
+	// !Return Admin Data
+	const data = {
+		admin,
+		mainAdmin,
+		adminLoading,
+	};
+	return data;
 };
 
 export default UseAdmin;

@@ -6,7 +6,7 @@ import UseAdmin from '../../hooks/UseAdmin';
 
 const DashBoardLayout = () => {
 	const {user} = useContext(AuthContext);
-	const [admin] = UseAdmin(user?.email);
+	const {admin} = UseAdmin(user?.email);
 	const dashboardLink = (
 		<>
 			<li>

@@ -7,7 +7,9 @@ import {AuthContext} from '../../../Contexts/AuthProvider';
 import ActionModal from '../../Shared/ActionModal/ActionModal';
 
 const AllUsers = () => {
-	const {logOut} = useContext(AuthContext);
+	// !get user and logout function
+	const {user, logOut} = useContext(AuthContext);
+	const email = user?.email;
 	// !set User for delete
 	const [selectedUser, setSelectedUser] = useState({});
 	const location = useLocation();
@@ -114,6 +116,7 @@ const AllUsers = () => {
 									</td>
 									<td>
 										<label
+											disabled={user?.admin === 'Main' || user?.email === email}
 											htmlFor="action-modal"
 											onClick={() => setSelectedUser(user)}
 											className="btn btn-sm bg-red-500 hover:bg-red-700 text-white"

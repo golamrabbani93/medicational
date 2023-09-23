@@ -1,12 +1,15 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useQuery} from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
 import {Navigate, useLocation} from 'react-router-dom';
 import toast from 'react-hot-toast';
 import {AuthContext} from '../../../Contexts/AuthProvider';
+import ActionModal from '../../Shared/ActionModal/ActionModal';
 
 const AllUsers = () => {
 	const {logOut} = useContext(AuthContext);
+	// !set User for delete
+	const [selectedUser, setSelectedUser] = useState({});
 	const location = useLocation();
 	// !!get all user to database
 	const userApi = `http://localhost:5000/users`;
@@ -56,6 +59,10 @@ const AllUsers = () => {
 				refetch();
 			});
 	};
+	// !Delete User
+	const deleteUser = (id) => {
+		console.log(id);
+	};
 	return (
 		<div>
 			<div>
@@ -90,15 +97,24 @@ const AllUsers = () => {
 										</button>
 									</td>
 									<td>
-										<button className="btn btn-sm bg-red-500 hover:bg-red-700 text-white ">
+										<label
+											htmlFor="action-modal"
+											onClick={() => setSelectedUser(user)}
+											className="btn btn-sm bg-red-500 hover:bg-red-700 text-white"
+										>
 											Delete
-										</button>
+										</label>
 									</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
 				</div>
+				<ActionModal
+					deletedItem={selectedUser}
+					cancelDelete={setSelectedUser}
+					deleteSuccess={deleteUser}
+				></ActionModal>
 			</div>
 		</div>
 	);

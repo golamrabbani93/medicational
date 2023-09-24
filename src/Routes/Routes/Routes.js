@@ -12,6 +12,7 @@ import AllUsers from '../../Pages/Dashboard/AllUsers/AllUsers';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AddDoctor from '../../Pages/Dashboard/AddDoctor/AddDoctor';
 import ManageDoctors from '../../Pages/Dashboard/ManageDoctors/ManageDoctors';
+import Payment from '../../Pages/Dashboard/Payment/Payment';
 
 const router = createBrowserRouter([
 	{
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
 			{
 				path: '/dashboard/myappointments',
 				element: <MyAppointment></MyAppointment>,
+			},
+			{
+				path: '/dashboard/payment/:id',
+				element: <Payment></Payment>,
 			},
 			{
 				path: '/dashboard/allusers',

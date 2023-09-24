@@ -2,10 +2,12 @@ import {format} from 'date-fns';
 import React, {useContext} from 'react';
 import {AuthContext} from '../../../../Contexts/AuthProvider';
 import {toast} from 'react-hot-toast';
+import {useNavigate} from 'react-router-dom';
 
 const BookingModal = ({service, setService, selectedDate, refetch}) => {
 	// !user data
-	const {user} = useContext(AuthContext);
+	const {user, logOut} = useContext(AuthContext);
+	const navigate = useNavigate();
 	const {name, slots} = service;
 	const date = format(selectedDate, 'PP');
 	const bookingData = (e) => {
@@ -22,11 +24,21 @@ const BookingModal = ({service, setService, selectedDate, refetch}) => {
 		fetch('http://localhost:5000/booking', {
 			method: 'POST',
 			headers: {
+				authorization: `bearer ${localStorage.getItem('Token')}`,
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(appointmentDetails),
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				//! Token Expired
+				if (res.status === 403) {
+					console.log(res);
+					toast.error('Token Expired');
+					logOut();
+					navigate('/login');
+				}
+				return res.json();
+			})
 			.then((data) => {
 				if (data.data._id) {
 					toast.success(`${data.message}`);

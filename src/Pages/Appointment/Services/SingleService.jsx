@@ -8,12 +8,12 @@ const SingleService = ({service, setService}) => {
 	// !Get User
 	const {user} = useContext(AuthContext);
 	const navigate = useNavigate();
-
+	const token = localStorage.getItem('Token');
 	const userLogedIn = () => {
-		if (user && user.uid) {
+		if (user && user.uid && token) {
 			setService(service);
 		} else {
-			toast.error('please Login First');
+			toast.error('Please Login First');
 			navigate('/login');
 		}
 	};

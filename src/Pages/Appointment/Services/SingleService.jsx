@@ -4,7 +4,7 @@ import {toast} from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom';
 
 const SingleService = ({service, setService}) => {
-	const {name, slots} = service;
+	const {name, slots, price} = service;
 	// !Get User
 	const {user} = useContext(AuthContext);
 	const navigate = useNavigate();
@@ -19,7 +19,7 @@ const SingleService = ({service, setService}) => {
 	};
 
 	return (
-		<div className="card w-96 bg-base-100 shadow-xl">
+		<div className="card w-96 bg-base-100 shadow-2xl">
 			<div className="card-body text-center">
 				<h2 className="text-secondary text-xl font-semibold">{name}</h2>
 				<p>{slots.length > 0 ? slots[0] : 'Try Another day'}</p>
@@ -37,6 +37,9 @@ const SingleService = ({service, setService}) => {
 						Book Appointment
 					</label>
 				</div>
+			</div>
+			<div className="absolute right-2 top-2 p-3 bg-primary text-white font-bold rounded-full">
+				${price}
 			</div>
 		</div>
 	);

@@ -8,7 +8,7 @@ const BookingModal = ({service, setService, selectedDate, refetch}) => {
 	// !user data
 	const {user, logOut} = useContext(AuthContext);
 	const navigate = useNavigate();
-	const {name, slots} = service;
+	const {name, slots, price} = service;
 	const date = format(selectedDate, 'PP');
 	const bookingData = (e) => {
 		e.preventDefault();
@@ -20,6 +20,7 @@ const BookingModal = ({service, setService, selectedDate, refetch}) => {
 			email: form.email.value,
 			phone: form.phone.value,
 			slot: form.slot.value,
+			price,
 		};
 		fetch('http://localhost:5000/booking', {
 			method: 'POST',

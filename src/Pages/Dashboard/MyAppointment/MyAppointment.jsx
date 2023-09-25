@@ -52,7 +52,7 @@ const MyAppointment = () => {
 								<th>Time</th>
 								<th>Date</th>
 								<th>Price</th>
-								<th>Pay</th>
+								<th>Payment</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -66,9 +66,13 @@ const MyAppointment = () => {
 										<td>{booking?.date}</td>
 										<td>${booking?.price}</td>
 										<td>
-											<button className="btn btn-sm btn-secondary">
-												<Link to={`/dashboard/payment/${booking._id}`}>Pay</Link>
-											</button>
+											{booking?.paid ? (
+												<h3 className="font-bold text-secondary">Paid</h3>
+											) : (
+												<button disabled={booking?.paid} className="btn btn-sm btn-secondary">
+													<Link to={`/dashboard/payment/${booking._id}`}>Pay</Link>
+												</button>
+											)}
 										</td>
 									</tr>
 								))

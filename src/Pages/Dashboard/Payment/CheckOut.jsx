@@ -2,7 +2,7 @@ import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 const CheckOut = ({booking}) => {
-	const {name, email} = booking;
+	const {_id, name, email} = booking;
 	const stripe = useStripe();
 	const elements = useElements();
 	// !Card Error Message
@@ -46,7 +46,6 @@ const CheckOut = ({booking}) => {
 			SetCardError(error.message);
 		} else {
 			SetCardError('');
-			console.log('[PaymentMethod]', paymentMethod);
 		}
 		setProcessing(true);
 		const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
@@ -63,8 +62,26 @@ const CheckOut = ({booking}) => {
 			return;
 		}
 		if (paymentIntent.status === 'succeeded') {
-			SetCardError('');
-			setSuccess('Congrats! your payment completed');
+			const paymentData = {
+				email: email,
+				price: paymentIntent.amount / 100,
+				transectionId: paymentIntent.id,
+				cardNumber: paymentMethod.card.last4,
+				bookingId: _id,
+			};
+			fetch('http://localhost:5000/payment', {
+				method: 'POST',
+				headers: {
+					authorization: `bearer ${localStorage.getItem('Token')}`,
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(paymentData),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					SetCardError('');
+					setSuccess('Congrats! your payment completed');
+				});
 		}
 		elements.getElement(CardElement).clear();
 		setProcessing(false);

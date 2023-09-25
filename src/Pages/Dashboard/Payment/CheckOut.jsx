@@ -15,6 +15,7 @@ const CheckOut = ({booking}) => {
 		fetch('http://localhost:5000/payment/create-payment-intent', {
 			method: 'POST',
 			headers: {
+				authorization: `bearer ${localStorage.getItem('Token')}`,
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(booking),

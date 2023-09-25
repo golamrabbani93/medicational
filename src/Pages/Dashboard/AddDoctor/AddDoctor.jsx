@@ -40,7 +40,7 @@ const AddDoctor = () => {
 						image: result.data.url,
 					};
 					// ! Doctor Data post Url
-					fetch('http://localhost:5000/doctor', {
+					fetch('https://medicational-server.vercel.app/doctor', {
 						method: 'POST',
 						headers: {
 							authorization: `bearer ${localStorage.getItem('Token')}`,
@@ -61,7 +61,7 @@ const AddDoctor = () => {
 	const {data: specialities = [], isLoading} = useQuery({
 		queryKey: ['specialities'],
 		queryFn: async () => {
-			const res = fetch('http://localhost:5000/doctor/specialities');
+			const res = fetch('https://medicational-server.vercel.app/doctor/specialities');
 			const data = (await res).json();
 			return data;
 		},

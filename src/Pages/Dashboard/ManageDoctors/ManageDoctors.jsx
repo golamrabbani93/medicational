@@ -12,7 +12,7 @@ const ManageDoctors = () => {
 	// !Set selected Doctor for delete
 	const [selectedDoctor, setSelectedDoctor] = useState({});
 	// !Doctor list get from database
-	const doctorsURl = 'http://localhost:5000/doctor';
+	const doctorsURl = 'https://medicational-server.vercel.app/doctor';
 	const {
 		data: doctors = [],
 		isLoading,
@@ -42,7 +42,7 @@ const ManageDoctors = () => {
 
 	// !Delete Doctor
 	const deleteDoctor = async (id) => {
-		const deleteURL = `http://localhost:5000/doctor/${id}`;
+		const deleteURL = `https://medicational-server.vercel.app/doctor/${id}`;
 
 		try {
 			const res = await fetch(deleteURL, {

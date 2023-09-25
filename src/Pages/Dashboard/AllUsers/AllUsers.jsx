@@ -14,7 +14,7 @@ const AllUsers = () => {
 	const [selectedUser, setSelectedUser] = useState({});
 	const location = useLocation();
 	// !!get all user to database
-	const userApi = `http://localhost:5000/users`;
+	const userApi = `https://medicational-server.vercel.app/users`;
 	const {
 		data: users = [],
 		isLoading,
@@ -43,7 +43,7 @@ const AllUsers = () => {
 
 	// !make Admin
 	const makeAdmin = (id) => {
-		const adminAPI = `http://localhost:5000/users/admin/${id}`;
+		const adminAPI = `https://medicational-server.vercel.app/users/admin/${id}`;
 		fetch(adminAPI, {
 			method: 'PUT',
 			headers: {
@@ -63,7 +63,7 @@ const AllUsers = () => {
 	};
 	// !Delete User
 	const deleteUser = async (id) => {
-		const deleteURL = `http://localhost:5000/users/${id}`;
+		const deleteURL = `https://medicational-server.vercel.app/users/${id}`;
 
 		try {
 			const res = await fetch(deleteURL, {

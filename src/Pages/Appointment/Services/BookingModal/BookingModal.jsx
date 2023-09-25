@@ -22,7 +22,7 @@ const BookingModal = ({service, setService, selectedDate, refetch}) => {
 			slot: form.slot.value,
 			price,
 		};
-		fetch('http://localhost:5000/booking', {
+		fetch('https://medicational-server.vercel.app/booking', {
 			method: 'POST',
 			headers: {
 				authorization: `bearer ${localStorage.getItem('Token')}`,

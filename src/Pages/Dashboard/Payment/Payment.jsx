@@ -14,7 +14,7 @@ const Payment = () => {
 	const {logOut} = useContext(AuthContext);
 	const {id} = useParams();
 	const location = useLocation();
-	const bookingURL = `http://localhost:5000/booking/${id}`;
+	const bookingURL = `https://medicational-server.vercel.app/booking/${id}`;
 
 	// !get booking by querry
 	const {data: booking = []} = useQuery({

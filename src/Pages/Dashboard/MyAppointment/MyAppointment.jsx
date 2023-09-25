@@ -11,7 +11,7 @@ const MyAppointment = () => {
 	const {user, logOut} = useContext(AuthContext);
 
 	// !create bookings Api
-	const bookingUrl = `http://localhost:5000/booking?email=${user?.email}`;
+	const bookingUrl = `https://medicational-server.vercel.app/booking?email=${user?.email}`;
 
 	// !use React Query For Load Data
 	const {data: userBookings = [], isLoading} = useQuery({

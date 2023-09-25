@@ -5,7 +5,7 @@ const UseToken = (email) => {
 	useEffect(() => {
 		if (email) {
 			// !get jwt token
-			fetch(`http://localhost:5000/jwt?email=${email}`)
+			fetch(`https://medicational-server.vercel.app/jwt?email=${email}`)
 				.then((res) => res.json())
 				.then((data) => {
 					localStorage.setItem('Token', data.token);

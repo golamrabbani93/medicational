@@ -12,7 +12,7 @@ const CheckOut = ({booking}) => {
 	const [processing, setProcessing] = useState(false);
 	useEffect(() => {
 		// Create PaymentIntent as soon as the page loads
-		fetch('http://localhost:5000/payment/create-payment-intent', {
+		fetch('https://medicational-server.vercel.app/payment/create-payment-intent', {
 			method: 'POST',
 			headers: {
 				authorization: `bearer ${localStorage.getItem('Token')}`,
@@ -70,7 +70,7 @@ const CheckOut = ({booking}) => {
 				cardNumber: paymentMethod.card.last4,
 				bookingId: _id,
 			};
-			fetch('http://localhost:5000/payment', {
+			fetch('https://medicational-server.vercel.app/payment', {
 				method: 'POST',
 				headers: {
 					authorization: `bearer ${localStorage.getItem('Token')}`,

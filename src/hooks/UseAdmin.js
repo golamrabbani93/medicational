@@ -7,7 +7,7 @@ const UseAdmin = (email) => {
 		if (email) {
 			async function fetchAdmin() {
 				try {
-					const res = await fetch(`http://localhost:5000/users/admin/${email}`);
+					const res = await fetch(`https://medicational-server.vercel.app/users/admin/${email}`);
 					const data = await res.json();
 					setAdmin(data.Admin);
 					setAdminLoading(false);
